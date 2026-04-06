@@ -13,7 +13,11 @@ native Win32 API.
 - Percentage (**%**)
 - Clear (**C**), Clear Entry (**CE**), and Backspace (**⌫**)
 - Full **keyboard support** (numpad included)
-- Clean Win32 GUI — no external runtime dependencies
+- **Toggleable console pane** at the bottom of the window
+  - History area showing every expression and its result
+  - Input field for typing full expressions (e.g. `3 + 4 * (2 - 1)`)
+  - Results sync back to the main display for continued button operations
+- **`--console` mode**: pure command-line REPL, no GUI
 
 ---
 
@@ -51,15 +55,42 @@ The executable is written to `build/bin/calculator.exe`.
 
 ## Running
 
+### GUI mode (default)
+
 ```bat
 build\bin\Release\calculator.exe
 ```
 
 Or simply double-click the executable in Explorer.
 
+Click the **Console ▼** button at the bottom of the window to reveal the
+console pane. Type any expression in the input field and press **Enter**
+to evaluate it. The result appears in the history area and is reflected in
+the main display so that subsequent button presses continue from that value.
+
+### Console mode (CLI REPL)
+
+```bat
+build\bin\Release\calculator.exe --console
+```
+
+```
+OpenClaw Calculator – Console Mode
+Enter an expression (e.g.  3 + 4 * 2 ) or 'exit' to quit.
+
+> 3 + 4 * 2
+  = 11
+> (1 + 2) * (3 + 4)
+  = 21
+> exit
+```
+
+The console mode supports the same expression syntax as the GUI console pane:
+numbers, `+` `-` `*` `/`, parentheses, and unary minus (e.g. `-5 * 2`).
+
 ---
 
-## Keyboard shortcuts
+## Keyboard shortcuts (GUI mode)
 
 | Key(s) | Action |
 |--------|--------|
@@ -73,3 +104,6 @@ Or simply double-click the executable in Explorer.
 | `Backspace` | Delete last digit |
 | `Escape` | Clear all (C) |
 | `%` | Percentage |
+
+> **Note:** keyboard shortcuts are suspended while the cursor is in the
+> console input field so that you can type full expressions freely.
